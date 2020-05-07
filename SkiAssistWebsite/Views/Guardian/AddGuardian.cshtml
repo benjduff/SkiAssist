@@ -1,0 +1,67 @@
+﻿@using System.Threading
+@using SkiAssistWebsite.Controllers
+@model AddGuardianViewModel
+
+@{
+    ViewBag.Title = "New Guardian";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <!-- Gaurdian Details-->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="header">
+                        <div id="new">
+                            <h4 class="title">Guardian Details</h4> 
+                        </div>
+                        <div class="content">
+                            @using (Html.BeginForm("PostGuardian", "Guardian"))
+                            {
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.AddGuardian.GuardianFirstName)
+                                            @Html.TextBoxFor(m => m.AddGuardian.GuardianFirstName, new { @class = "form-control", placeholder = "First Name" })
+                                            @Html.ValidationMessageFor(m => m.AddGuardian.GuardianFirstName)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.AddGuardian.GuardianLastName)
+                                            @Html.TextBoxFor(m => m.AddGuardian.GuardianLastName, new { @class = "form-control", placeholder = "Last Name" })
+                                            @Html.ValidationMessageFor(m => m.AddGuardian.GuardianLastName)
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.AddGuardian.GuardianContactNumber)
+                                            @Html.TextBoxFor(m => m.AddGuardian.GuardianContactNumber, new { @class = "form-control", placeholder = "Mobile Number" })
+                                            @Html.ValidationMessageFor(m => m.AddGuardian.GuardianContactNumber)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.AddGuardian.GuardianContactEmail)
+                                            @Html.TextBoxFor(m => m.AddGuardian.GuardianContactEmail, new { @class = "form-control", placeholder = "Email" })
+                                            @Html.ValidationMessageFor(m => m.AddGuardian.GuardianContactEmail)
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.HiddenFor(m => m.AddGuardian.NewStudentId)
+                                <button type="submit" class="btn btn-info btn-fill pull-middle">Add New Guardian</button>
+                            }
+                            <div class="clear-fix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

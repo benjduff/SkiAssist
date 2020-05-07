@@ -1,0 +1,78 @@
+﻿@using SkiAssistWebsite.Models
+@using SkiAssistWebsite.ViewModels
+@model StaffListViewModel
+
+@{
+    ViewBag.Title = "Staff List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Staff List</h4>
+                        <p class="category"><!--Subtitle can go here. Not sure what it will be yet.--></p>
+                        <div class="header">
+                            <h4 class="title">Staff Search</h4>
+                        </div>
+                        <div class="content">
+                            @using (Html.BeginForm("StaffSearch", "Staff"))
+                            {
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="search">
+                                            @Html.LabelFor(m => m.SearchString)
+                                            @Html.TextBoxFor(m => m.SearchString, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-info btn-fill">Search</button>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover table-striped"> 
+                            <thead>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Contact Number</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            </thead>
+                            <tbody>
+                            @{
+                                if (Model.StaffList.Count == 0)
+                                {
+                                    <h3 class="title">There are no students currently in the system</h3>
+                                }
+                                else
+                                {
+                                    foreach (var staff in Model.StaffList)
+                                    {
+                                        <tr>
+                                            <td>@staff.StaffId</td>
+                                            <td>@staff.FirstName</td>
+                                            <td>@staff.LastName</td>
+                                            <td>@staff.ContactNumber</td>
+                                            <td>@staff.ContactEmail</td>
+                                            <td>@staff.RoleType</td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

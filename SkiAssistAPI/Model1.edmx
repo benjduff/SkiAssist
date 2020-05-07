@@ -1,0 +1,999 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SkiAssistDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Custody">
+          <Key>
+            <PropertyRef Name="studentId" />
+            <PropertyRef Name="staffId" />
+            <PropertyRef Name="custodyStartTime" />
+          </Key>
+          <Property Name="studentId" Type="int" Nullable="false" />
+          <Property Name="staffId" Type="int" Nullable="false" />
+          <Property Name="custodyStartTime" Type="datetime" Nullable="false" />
+          <Property Name="custodyEndTime" Type="datetime" />
+          <Property Name="custodyType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TimeAlertRaised" Type="datetime" />
+          <Property Name="TimeAlertCancelled" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CustodyType">
+          <Key>
+            <PropertyRef Name="custodyType" />
+          </Key>
+          <Property Name="custodyType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Diet">
+          <Key>
+            <PropertyRef Name="dietType" />
+          </Key>
+          <Property Name="dietType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Guardian">
+          <Key>
+            <PropertyRef Name="guardianID" />
+          </Key>
+          <Property Name="guardianID" Type="int" Nullable="false" />
+          <Property Name="guardianFirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="guardianLastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="guardianContactNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="guardianContactEmail" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MedicalConditions">
+          <Key>
+            <PropertyRef Name="MedicalCondition" />
+          </Key>
+          <Property Name="MedicalCondition" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="permission" />
+          </Key>
+          <Property Name="permission" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PermissionGroup">
+          <Key>
+            <PropertyRef Name="roleType" />
+            <PropertyRef Name="permission" />
+          </Key>
+          <Property Name="roleType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="permission" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="roleType" />
+          </Key>
+          <Property Name="roleType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="skillTitle" />
+          </Key>
+          <Property Name="skillTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="skillLevel" Type="int" />
+          <Property Name="skillSortOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="staffId" />
+          </Key>
+          <Property Name="staffId" Type="int" Nullable="false" />
+          <Property Name="staffFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="staffLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="staffContactNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="staffContactEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="staffUsername" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="roleType" Type="nvarchar" MaxLength="50" />
+          <Property Name="staffPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TokenId" Type="int" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="studentId" />
+          </Key>
+          <Property Name="studentId" Type="int" Nullable="false" />
+          <Property Name="studentFirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="studentLastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="studentDOB" Type="date" Nullable="false" />
+          <Property Name="ticketNumber" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StudentDiet">
+          <Key>
+            <PropertyRef Name="dietType" />
+            <PropertyRef Name="studentId" />
+          </Key>
+          <Property Name="dietType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="studentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentGuardian">
+          <Key>
+            <PropertyRef Name="studentId" />
+            <PropertyRef Name="guardianId" />
+          </Key>
+          <Property Name="studentId" Type="int" Nullable="false" />
+          <Property Name="guardianId" Type="int" Nullable="false" />
+          <Property Name="studentguardianRelationship" Type="nvarchar" MaxLength="50" />
+          <Property Name="studentguardianExpiry" Type="date" />
+        </EntityType>
+        <EntityType Name="StudentMedical">
+          <Key>
+            <PropertyRef Name="MedicalCondition" />
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="MedicalCondition" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentSkill">
+          <Key>
+            <PropertyRef Name="studentId" />
+            <PropertyRef Name="skillTitle" />
+          </Key>
+          <Property Name="studentId" Type="int" Nullable="false" />
+          <Property Name="skillTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="isPassed" Type="tinyint" />
+          <Property Name="studentskillNotes" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="ticketNumber" />
+          </Key>
+          <Property Name="ticketNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ticketIssueDate" Type="date" />
+          <Property Name="ticketExpiryDate" Type="date" />
+          <Property Name="ticketLessonsRemaining" Type="int" />
+          <Property Name="ticketIsValid" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Token">
+          <Key>
+            <PropertyRef Name="TokenId" />
+          </Key>
+          <Property Name="TokenId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AuthToken" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="IssuedOn" Type="datetime" Nullable="false" />
+          <Property Name="ExpiresOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Custody_CustodyType">
+          <End Role="CustodyType" Type="Self.CustodyType" Multiplicity="1" />
+          <End Role="Custody" Type="Self.Custody" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustodyType">
+              <PropertyRef Name="custodyType" />
+            </Principal>
+            <Dependent Role="Custody">
+              <PropertyRef Name="custodyType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Custody_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Custody" Type="Self.Custody" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="staffId" />
+            </Principal>
+            <Dependent Role="Custody">
+              <PropertyRef Name="staffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Custody_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Custody" Type="Self.Custody" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="studentId" />
+            </Principal>
+            <Dependent Role="Custody">
+              <PropertyRef Name="studentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PermissionGroup_Permission">
+          <End Role="Permission" Type="Self.Permission" Multiplicity="1" />
+          <End Role="PermissionGroup" Type="Self.PermissionGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permission">
+              <PropertyRef Name="permission" />
+            </Principal>
+            <Dependent Role="PermissionGroup">
+              <PropertyRef Name="permission" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PermissionGroup_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="PermissionGroup" Type="Self.PermissionGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="roleType" />
+            </Principal>
+            <Dependent Role="PermissionGroup">
+              <PropertyRef Name="roleType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="roleType" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="roleType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Token">
+          <End Role="Token" Type="Self.Token" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Token">
+              <PropertyRef Name="TokenId" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="TokenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Ticket">
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="ticketNumber" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="ticketNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDiet_Diet">
+          <End Role="Diet" Type="Self.Diet" Multiplicity="1" />
+          <End Role="StudentDiet" Type="Self.StudentDiet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diet">
+              <PropertyRef Name="dietType" />
+            </Principal>
+            <Dependent Role="StudentDiet">
+              <PropertyRef Name="dietType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDiet_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentDiet" Type="Self.StudentDiet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="studentId" />
+            </Principal>
+            <Dependent Role="StudentDiet">
+              <PropertyRef Name="studentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentGuardian_Guardian">
+          <End Role="Guardian" Type="Self.Guardian" Multiplicity="1" />
+          <End Role="StudentGuardian" Type="Self.StudentGuardian" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guardian">
+              <PropertyRef Name="guardianID" />
+            </Principal>
+            <Dependent Role="StudentGuardian">
+              <PropertyRef Name="guardianId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentGuardian_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentGuardian" Type="Self.StudentGuardian" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="studentId" />
+            </Principal>
+            <Dependent Role="StudentGuardian">
+              <PropertyRef Name="studentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentMedical_Medical">
+          <End Role="MedicalConditions" Type="Self.MedicalConditions" Multiplicity="1" />
+          <End Role="StudentMedical" Type="Self.StudentMedical" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedicalConditions">
+              <PropertyRef Name="MedicalCondition" />
+            </Principal>
+            <Dependent Role="StudentMedical">
+              <PropertyRef Name="MedicalCondition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentMedical_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentMedical" Type="Self.StudentMedical" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="studentId" />
+            </Principal>
+            <Dependent Role="StudentMedical">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentSkill_Skill">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+          <End Role="StudentSkill" Type="Self.StudentSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="skillTitle" />
+            </Principal>
+            <Dependent Role="StudentSkill">
+              <PropertyRef Name="skillTitle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentSkill_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentSkill" Type="Self.StudentSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="studentId" />
+            </Principal>
+            <Dependent Role="StudentSkill">
+              <PropertyRef Name="studentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SkiAssistDBModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Custody" EntityType="Self.Custody" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustodyType" EntityType="Self.CustodyType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Diet" EntityType="Self.Diet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Guardian" EntityType="Self.Guardian" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MedicalConditions" EntityType="Self.MedicalConditions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permission" EntityType="Self.Permission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PermissionGroup" EntityType="Self.PermissionGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Skill" EntityType="Self.Skill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentDiet" EntityType="Self.StudentDiet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentGuardian" EntityType="Self.StudentGuardian" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentMedical" EntityType="Self.StudentMedical" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentSkill" EntityType="Self.StudentSkill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Token" EntityType="Self.Token" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Custody_CustodyType" Association="Self.FK_Custody_CustodyType">
+            <End Role="CustodyType" EntitySet="CustodyType" />
+            <End Role="Custody" EntitySet="Custody" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Custody_Staff" Association="Self.FK_Custody_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Custody" EntitySet="Custody" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Custody_Student" Association="Self.FK_Custody_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Custody" EntitySet="Custody" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PermissionGroup_Permission" Association="Self.FK_PermissionGroup_Permission">
+            <End Role="Permission" EntitySet="Permission" />
+            <End Role="PermissionGroup" EntitySet="PermissionGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PermissionGroup_Role" Association="Self.FK_PermissionGroup_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="PermissionGroup" EntitySet="PermissionGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Role" Association="Self.FK_Staff_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Token" Association="Self.FK_Staff_Token">
+            <End Role="Token" EntitySet="Token" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Ticket" Association="Self.FK_Student_Ticket">
+            <End Role="Ticket" EntitySet="Ticket" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDiet_Diet" Association="Self.FK_StudentDiet_Diet">
+            <End Role="Diet" EntitySet="Diet" />
+            <End Role="StudentDiet" EntitySet="StudentDiet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDiet_Student" Association="Self.FK_StudentDiet_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentDiet" EntitySet="StudentDiet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentGuardian_Guardian" Association="Self.FK_StudentGuardian_Guardian">
+            <End Role="Guardian" EntitySet="Guardian" />
+            <End Role="StudentGuardian" EntitySet="StudentGuardian" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentGuardian_Student" Association="Self.FK_StudentGuardian_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentGuardian" EntitySet="StudentGuardian" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentMedical_Medical" Association="Self.FK_StudentMedical_Medical">
+            <End Role="MedicalConditions" EntitySet="MedicalConditions" />
+            <End Role="StudentMedical" EntitySet="StudentMedical" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentMedical_Student" Association="Self.FK_StudentMedical_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentMedical" EntitySet="StudentMedical" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentSkill_Skill" Association="Self.FK_StudentSkill_Skill">
+            <End Role="Skill" EntitySet="Skill" />
+            <End Role="StudentSkill" EntitySet="StudentSkill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentSkill_Student" Association="Self.FK_StudentSkill_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentSkill" EntitySet="StudentSkill" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SkiAssistDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Custody">
+          <Key>
+            <PropertyRef Name="studentId" />
+            <PropertyRef Name="staffId" />
+            <PropertyRef Name="custodyStartTime" />
+          </Key>
+          <Property Name="studentId" Type="Int32" Nullable="false" />
+          <Property Name="staffId" Type="Int32" Nullable="false" />
+          <Property Name="custodyStartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="custodyEndTime" Type="DateTime" Precision="3" />
+          <Property Name="custodyType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CustodyType1" Relationship="Self.FK_Custody_CustodyType" FromRole="Custody" ToRole="CustodyType" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Custody_Staff" FromRole="Custody" ToRole="Staff" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Custody_Student" FromRole="Custody" ToRole="Student" />
+          <Property Name="TimeAlertRaised" Type="DateTime" Precision="3" />
+          <Property Name="TimeAlertCancelled" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CustodyType">
+          <Key>
+            <PropertyRef Name="custodyType1" />
+          </Key>
+          <Property Name="custodyType1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Custody" Relationship="Self.FK_Custody_CustodyType" FromRole="CustodyType" ToRole="Custody" />
+        </EntityType>
+        <EntityType Name="Diet">
+          <Key>
+            <PropertyRef Name="dietType" />
+          </Key>
+          <Property Name="dietType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="Self.StudentDiet" FromRole="Diet" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Guardian">
+          <Key>
+            <PropertyRef Name="guardianID" />
+          </Key>
+          <Property Name="guardianID" Type="Int32" Nullable="false" />
+          <Property Name="guardianFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="guardianLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="guardianContactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="guardianContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="StudentGuardian" Relationship="Self.FK_StudentGuardian_Guardian" FromRole="Guardian" ToRole="StudentGuardian" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="permission1" />
+          </Key>
+          <Property Name="permission1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.PermissionGroup" FromRole="Permission" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="roleType" />
+          </Key>
+          <Property Name="roleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_Role" FromRole="Role" ToRole="Staff" />
+          <NavigationProperty Name="Permission" Relationship="Self.PermissionGroup" FromRole="Role" ToRole="Permission" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="skillTitle" />
+          </Key>
+          <Property Name="skillTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="skillLevel" Type="Int32" />
+          <Property Name="skillSortOrder" Type="Int32" />
+          <NavigationProperty Name="StudentSkill" Relationship="Self.FK_StudentSkill_Skill" FromRole="Skill" ToRole="StudentSkill" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="staffId" />
+          </Key>
+          <Property Name="staffId" Type="Int32" Nullable="false" />
+          <Property Name="staffFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="staffLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="staffContactNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="staffContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="staffUsername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="roleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Custody" Relationship="Self.FK_Custody_Staff" FromRole="Staff" ToRole="Custody" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Staff_Role" FromRole="Staff" ToRole="Role" />
+          <Property Name="staffPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TokenId" Type="Int32" />
+          <NavigationProperty Name="Token" Relationship="SkiAssistDBModel.FK_Staff_Token" FromRole="Staff" ToRole="Token" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="studentId" />
+          </Key>
+          <Property Name="studentId" Type="Int32" Nullable="false" />
+          <Property Name="studentFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="studentLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="studentDOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ticketNumber" Type="String" FixedLength="false" MaxLength="50" Unicode="true" />
+          <NavigationProperty Name="Custody" Relationship="Self.FK_Custody_Student" FromRole="Student" ToRole="Custody" />
+          <NavigationProperty Name="Ticket" Relationship="Self.FK_Student_Ticket" FromRole="Student" ToRole="Ticket" />
+          <NavigationProperty Name="StudentGuardian" Relationship="Self.FK_StudentGuardian_Student" FromRole="Student" ToRole="StudentGuardian" />
+          <NavigationProperty Name="StudentSkill" Relationship="Self.FK_StudentSkill_Student" FromRole="Student" ToRole="StudentSkill" />
+          <NavigationProperty Name="Diet" Relationship="Self.StudentDiet" FromRole="Student" ToRole="Diet" />
+          <NavigationProperty Name="MedicalConditions" Relationship="SkiAssistDBModel.StudentMedical" FromRole="Student" ToRole="MedicalConditions" />
+        </EntityType>
+        <EntityType Name="StudentGuardian">
+          <Key>
+            <PropertyRef Name="studentId" />
+            <PropertyRef Name="guardianId" />
+          </Key>
+          <Property Name="studentId" Type="Int32" Nullable="false" />
+          <Property Name="guardianId" Type="Int32" Nullable="false" />
+          <Property Name="studentguardianRelationship" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="studentguardianExpiry" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Guardian" Relationship="Self.FK_StudentGuardian_Guardian" FromRole="StudentGuardian" ToRole="Guardian" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_StudentGuardian_Student" FromRole="StudentGuardian" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="StudentSkill">
+          <Key>
+            <PropertyRef Name="studentId" />
+            <PropertyRef Name="skillTitle" />
+          </Key>
+          <Property Name="studentId" Type="Int32" Nullable="false" />
+          <Property Name="skillTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="isPassed" Type="Byte" />
+          <Property Name="studentskillNotes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Skill" Relationship="Self.FK_StudentSkill_Skill" FromRole="StudentSkill" ToRole="Skill" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_StudentSkill_Student" FromRole="StudentSkill" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="ticketNumber" />
+          </Key>
+          <Property Name="ticketNumber" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ticketIssueDate" Type="DateTime" Precision="0" />
+          <Property Name="ticketExpiryDate" Type="DateTime" Precision="0" />
+          <Property Name="ticketLessonsRemaining" Type="Int32" />
+          <Property Name="ticketIsValid" Type="Byte" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Student_Ticket" FromRole="Ticket" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK_Custody_CustodyType">
+          <End Role="CustodyType" Type="Self.CustodyType" Multiplicity="1" />
+          <End Role="Custody" Type="Self.Custody" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustodyType">
+              <PropertyRef Name="custodyType1" />
+            </Principal>
+            <Dependent Role="Custody">
+              <PropertyRef Name="custodyType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Custody_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Custody" Type="Self.Custody" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="staffId" />
+            </Principal>
+            <Dependent Role="Custody">
+              <PropertyRef Name="staffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Custody_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Custody" Type="Self.Custody" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="studentId" />
+            </Principal>
+            <Dependent Role="Custody">
+              <PropertyRef Name="studentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentGuardian_Guardian">
+          <End Role="Guardian" Type="Self.Guardian" Multiplicity="1" />
+          <End Role="StudentGuardian" Type="Self.StudentGuardian" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guardian">
+              <PropertyRef Name="guardianID" />
+            </Principal>
+            <Dependent Role="StudentGuardian">
+              <PropertyRef Name="guardianId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="roleType" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="roleType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentSkill_Skill">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+          <End Role="StudentSkill" Type="Self.StudentSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="skillTitle" />
+            </Principal>
+            <Dependent Role="StudentSkill">
+              <PropertyRef Name="skillTitle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Ticket">
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ticket">
+              <PropertyRef Name="ticketNumber" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="ticketNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentGuardian_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentGuardian" Type="Self.StudentGuardian" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="studentId" />
+            </Principal>
+            <Dependent Role="StudentGuardian">
+              <PropertyRef Name="studentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentSkill_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentSkill" Type="Self.StudentSkill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="studentId" />
+            </Principal>
+            <Dependent Role="StudentSkill">
+              <PropertyRef Name="studentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PermissionGroup">
+          <End Role="Permission" Type="Self.Permission" Multiplicity="*" />
+          <End Role="Role" Type="Self.Role" Multiplicity="*" />
+        </Association>
+        <Association Name="StudentDiet">
+          <End Role="Diet" Type="Self.Diet" Multiplicity="*" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="SkiAssistDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Custody" EntityType="Self.Custody" />
+          <EntitySet Name="CustodyType" EntityType="Self.CustodyType" />
+          <EntitySet Name="Diet" EntityType="Self.Diet" />
+          <EntitySet Name="Guardian" EntityType="Self.Guardian" />
+          <EntitySet Name="Permission" EntityType="Self.Permission" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Skill" EntityType="Self.Skill" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" />
+          <EntitySet Name="Student" EntityType="Self.Student" />
+          <EntitySet Name="StudentGuardian" EntityType="Self.StudentGuardian" />
+          <EntitySet Name="StudentSkill" EntityType="Self.StudentSkill" />
+          <EntitySet Name="Ticket" EntityType="Self.Ticket" />
+          <AssociationSet Name="FK_Custody_CustodyType" Association="Self.FK_Custody_CustodyType">
+            <End Role="CustodyType" EntitySet="CustodyType" />
+            <End Role="Custody" EntitySet="Custody" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Custody_Staff" Association="Self.FK_Custody_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Custody" EntitySet="Custody" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Custody_Student" Association="Self.FK_Custody_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Custody" EntitySet="Custody" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentGuardian_Guardian" Association="Self.FK_StudentGuardian_Guardian">
+            <End Role="Guardian" EntitySet="Guardian" />
+            <End Role="StudentGuardian" EntitySet="StudentGuardian" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Role" Association="Self.FK_Staff_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentSkill_Skill" Association="Self.FK_StudentSkill_Skill">
+            <End Role="Skill" EntitySet="Skill" />
+            <End Role="StudentSkill" EntitySet="StudentSkill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Ticket" Association="Self.FK_Student_Ticket">
+            <End Role="Ticket" EntitySet="Ticket" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentGuardian_Student" Association="Self.FK_StudentGuardian_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentGuardian" EntitySet="StudentGuardian" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentSkill_Student" Association="Self.FK_StudentSkill_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentSkill" EntitySet="StudentSkill" />
+          </AssociationSet>
+          <AssociationSet Name="PermissionGroup" Association="Self.PermissionGroup">
+            <End Role="Permission" EntitySet="Permission" />
+            <End Role="Role" EntitySet="Role" />
+          </AssociationSet>
+          <AssociationSet Name="StudentDiet" Association="Self.StudentDiet">
+            <End Role="Diet" EntitySet="Diet" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <EntitySet Name="C__RefactorLog" EntityType="SkiAssistDBModel.C__RefactorLog" />
+          <EntitySet Name="MedicalConditions" EntityType="SkiAssistDBModel.MedicalConditions" />
+          <AssociationSet Name="StudentMedical" Association="SkiAssistDBModel.StudentMedical">
+            <End Role="MedicalConditions" EntitySet="MedicalConditions" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <EntitySet Name="Token" EntityType="SkiAssistDBModel.Token" />
+          <AssociationSet Name="FK_Staff_Token" Association="SkiAssistDBModel.FK_Staff_Token">
+            <End Role="Token" EntitySet="Token" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MedicalConditions">
+          <Key>
+            <PropertyRef Name="MedicalCondition" />
+          </Key>
+          <Property Name="MedicalCondition" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Student" Relationship="SkiAssistDBModel.StudentMedical" FromRole="MedicalConditions" ToRole="Student" />
+        </EntityType>
+        <Association Name="StudentMedical">
+          <End Type="SkiAssistDBModel.MedicalConditions" Role="MedicalConditions" Multiplicity="*" />
+          <End Type="SkiAssistDBModel.Student" Role="Student" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Token">
+          <Key>
+            <PropertyRef Name="TokenId" />
+          </Key>
+          <Property Name="TokenId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AuthToken" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IssuedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpiresOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Staff" Relationship="SkiAssistDBModel.FK_Staff_Token" FromRole="Token" ToRole="Staff" />
+        </EntityType>
+        <Association Name="FK_Staff_Token">
+          <End Type="SkiAssistDBModel.Token" Role="Token" Multiplicity="0..1" />
+          <End Type="SkiAssistDBModel.Staff" Role="Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Token">
+              <PropertyRef Name="TokenId" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="TokenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SkiAssistDBModelStoreContainer" CdmEntityContainer="SkiAssistDBEntities">
+          <EntitySetMapping Name="Custody">
+            <EntityTypeMapping TypeName="SkiAssistDBModel.Custody">
+              <MappingFragment StoreEntitySet="Custody">
+                <ScalarProperty Name="TimeAlertCancelled" ColumnName="TimeAlertCancelled" />
+                <ScalarProperty Name="TimeAlertRaised" ColumnName="TimeAlertRaised" />
+                <ScalarProperty Name="studentId" ColumnName="studentId" />
+                <ScalarProperty Name="staffId" ColumnName="staffId" />
+                <ScalarProperty Name="custodyStartTime" ColumnName="custodyStartTime" />
+                <ScalarProperty Name="custodyEndTime" ColumnName="custodyEndTime" />
+                <ScalarProperty Name="custodyType" ColumnName="custodyType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustodyType">
+            <EntityTypeMapping TypeName="SkiAssistDBModel.CustodyType">
+              <MappingFragment StoreEntitySet="CustodyType">
+                <ScalarProperty Name="custodyType1" ColumnName="custodyType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Diet">
+            <EntityTypeMapping TypeName="SkiAssistDBModel.Diet">
+              <MappingFragment StoreEntitySet="Diet">
+                <ScalarProperty Name="dietType" ColumnName="dietType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Guardian">
+            <EntityTypeMapping TypeName="SkiAssistDBModel.Guardian">
+              <MappingFragment StoreEntitySet="Guardian">
+                <ScalarProperty Name="guardianID" ColumnName="guardianID" />
+                <ScalarProperty Name="guardianFirstName" ColumnName="guardianFirstName" />
+                <ScalarProperty Name="guardianLastName" ColumnName="guardianLastName" />
+                <ScalarProperty Name="guardianContactNumber" ColumnName="guardianContactNumber" />
+                <ScalarProperty Name="guardianContactEmail" ColumnName="guardianContactEmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permission">
+            <EntityTypeMapping TypeName="SkiAssistDBModel.Permission">
+              <MappingFragment StoreEntitySet="Permission">
+                <ScalarProperty Name="permission1" ColumnName="permission" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="SkiAssistDBModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="roleType" ColumnName="roleType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Skill">
+            <EntityTypeMapping TypeName="SkiAssistDBModel.Skill">
+              <MappingFragment StoreEntitySet="Skill">
+                <ScalarProperty Name="skillTitle" ColumnName="skillTitle" />
+                <ScalarProperty Name="skillLevel" ColumnName="skillLevel" />
+                <ScalarProperty Name="skillSortOrder" ColumnName="skillSortOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staff">
+            <EntityTypeMapping TypeName="SkiAssistDBModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="TokenId" ColumnName="TokenId" />
+                <ScalarProperty Name="staffPassword" ColumnName="staffPassword" />
+                <ScalarProperty Name="staffId" ColumnName="staffId" />
+                <ScalarProperty Name="staffFirstName" ColumnName="staffFirstName" />
+                <ScalarProperty Name="staffLastName" ColumnName="staffLastName" />
+                <ScalarProperty Name="staffContactNum" ColumnName="staffContactNum" />
+                <ScalarProperty Name="staffContactEmail" ColumnName="staffContactEmail" />
+                <ScalarProperty Name="staffUsername" ColumnName="staffUsername" />
+                <ScalarProperty Name="roleType" ColumnName="roleType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="SkiAssistDBModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="studentId" ColumnName="studentId" />
+                <ScalarProperty Name="studentFirstName" ColumnName="studentFirstName" />
+                <ScalarProperty Name="studentLastName" ColumnName="studentLastName" />
+                <ScalarProperty Name="studentDOB" ColumnName="studentDOB" />
+                <ScalarProperty Name="ticketNumber" ColumnName="ticketNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentGuardian">
+            <EntityTypeMapping TypeName="SkiAssistDBModel.StudentGuardian">
+              <MappingFragment StoreEntitySet="StudentGuardian">
+                <ScalarProperty Name="studentId" ColumnName="studentId" />
+                <ScalarProperty Name="guardianId" ColumnName="guardianId" />
+                <ScalarProperty Name="studentguardianRelationship" ColumnName="studentguardianRelationship" />
+                <ScalarProperty Name="studentguardianExpiry" ColumnName="studentguardianExpiry" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentSkill">
+            <EntityTypeMapping TypeName="SkiAssistDBModel.StudentSkill">
+              <MappingFragment StoreEntitySet="StudentSkill">
+                <ScalarProperty Name="studentId" ColumnName="studentId" />
+                <ScalarProperty Name="skillTitle" ColumnName="skillTitle" />
+                <ScalarProperty Name="isPassed" ColumnName="isPassed" />
+                <ScalarProperty Name="studentskillNotes" ColumnName="studentskillNotes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ticket">
+            <EntityTypeMapping TypeName="SkiAssistDBModel.Ticket">
+              <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="ticketNumber" ColumnName="ticketNumber" />
+                <ScalarProperty Name="ticketIssueDate" ColumnName="ticketIssueDate" />
+                <ScalarProperty Name="ticketExpiryDate" ColumnName="ticketExpiryDate" />
+                <ScalarProperty Name="ticketLessonsRemaining" ColumnName="ticketLessonsRemaining" />
+                <ScalarProperty Name="ticketIsValid" ColumnName="ticketIsValid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PermissionGroup" TypeName="SkiAssistDBModel.PermissionGroup" StoreEntitySet="PermissionGroup">
+            <EndProperty Name="Permission">
+              <ScalarProperty Name="permission1" ColumnName="permission" />
+            </EndProperty>
+            <EndProperty Name="Role">
+              <ScalarProperty Name="roleType" ColumnName="roleType" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="StudentDiet" TypeName="SkiAssistDBModel.StudentDiet" StoreEntitySet="StudentDiet">
+            <EndProperty Name="Diet">
+              <ScalarProperty Name="dietType" ColumnName="dietType" />
+            </EndProperty>
+            <EndProperty Name="Student">
+              <ScalarProperty Name="studentId" ColumnName="studentId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="SkiAssistDBModel.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedicalConditions">
+            <EntityTypeMapping TypeName="SkiAssistDBModel.MedicalConditions">
+              <MappingFragment StoreEntitySet="MedicalConditions">
+                <ScalarProperty Name="MedicalCondition" ColumnName="MedicalCondition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="StudentMedical" TypeName="SkiAssistDBModel.StudentMedical" StoreEntitySet="StudentMedical">
+            <EndProperty Name="Student">
+              <ScalarProperty Name="studentId" ColumnName="StudentId" />
+            </EndProperty>
+            <EndProperty Name="MedicalConditions">
+              <ScalarProperty Name="MedicalCondition" ColumnName="MedicalCondition" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Token">
+            <EntityTypeMapping TypeName="SkiAssistDBModel.Token">
+              <MappingFragment StoreEntitySet="Token">
+                <ScalarProperty Name="ExpiresOn" ColumnName="ExpiresOn" />
+                <ScalarProperty Name="IssuedOn" ColumnName="IssuedOn" />
+                <ScalarProperty Name="AuthToken" ColumnName="AuthToken" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="TokenId" ColumnName="TokenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

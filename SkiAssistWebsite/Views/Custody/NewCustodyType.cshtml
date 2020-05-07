@@ -1,0 +1,69 @@
+﻿@using SkiAssistWebsite.Models
+@using SkiAssistWebsite.ViewModels
+@model SkiAssistWebsite.ViewModels.CustodyTypeViewModel
+
+@{
+    ViewBag.Title = "NewCustodyType";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+@using (Html.BeginForm("PostCustodyType", "Custody")){ 
+    <div class="row">
+        <div class="col-md-6"> 
+            <div class="form-group">
+                @Html.LabelFor(m => m.custodyType1)
+                @Html.TextBoxFor(m => m.custodyType1, new { @class = "form-control", placeholder = "New Custody Type" })
+                @Html.ValidationMessageFor(m => m.custodyType1)
+                @Html.HiddenFor(m=>m.custodyTypeList)
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-info btn-fill pull-middle">Add New Custody Type</button>
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Custody Types</h4>
+                        <p class="category"><!--Subtitle can go here. Not sure what it will be yet.--></p>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                            <th>Custody Types</th>
+                            </thead>
+                            <tbody>
+                            @{
+                                if (Model.custodyTypeList.Count == 0)
+                                {
+                                    <h3 class="title">There are no Custody Types currently in the system</h3>
+                                }
+                                else
+                                {
+                                    foreach (var type in Model.custodyTypeList)
+                                    {
+                                        <tr>
+                                            <td>@type</td>
+                                        </tr>
+                                        <tr>
+                                            @Ajax.ActionLink("Delete", "DeleteCustodyType", new {custodyType = type}, new AjaxOptions()
+                                            {
+                                                Confirm = "Are you sure you wish to delete?",
+                                                HttpMethod = "DELETE"
+                                            })
+                                        </tr>
+                                    }
+                                }
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

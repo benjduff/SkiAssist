@@ -1,0 +1,76 @@
+﻿@using SkiAssistWebsite.Controllers
+@model SkiAssistWebsite.ViewModels.ProfileViewModel
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-user">
+                    <div class="image">
+                        <img src="http://pre15.deviantart.net/ea5d/th/pre/i/2010/333/1/4/blue_snow_by_andythogern-d33vi0m.jpg" alt="..." />
+                    </div>
+                    <div class="content">
+                        <div class="author">
+                            <a href="#">
+                                <!--<img class="avatar border-gray" src="assets/img/faces/DakotaRice.png" alt="..." />-->
+                                <br />
+                                <br /> 
+                                <br />
+                                <br />
+                                <h1 class="h2">STUDENT</h1>
+                                <h4 class="title">
+                                    @Model.Student.StudentFirstName @Model.Student.StudentLastName<br />
+                                    <small><i class="pe-7s-phone"></i>Student Id: @Model.Student.StudentId</small>
+                                    <small><i class="pe-7s-mail"></i>Age: @Model.Student.StudentAge<br /></small>
+                                    <small><i class="pe-7s-mail"></i>Ticket No: @Model.Student.TicketNumber<br /></small>
+                                </h4>
+                                <!--<p class="description text-center">Normally late picking up Dakota.</p>-->
+                                @{
+                                    if (Model.Guardian.Count < 1)
+                                    {
+                                        <h2>There are no guardians saved for this student!</h2>
+                                        <h3>Please add one now</h3>
+                                    }
+                                    else
+                                    {
+                                        <h1 class="h2">GUARDIANS</h1>
+                                        foreach (var guardian in Model.Guardian)
+                                        {
+                                            <h4 class="title">
+                                                @guardian.GuardianFirstName @guardian.GuardianLastName<br />
+                                                <small><i class="pe-7s-phone"></i>Ph: @guardian.GuardianContactNumber</small>
+                                                <small><i class="pe-7s-mail"></i>Email: @guardian.GuardianContactEmail</small>
+                                                <!--<small><i class="pe-7s-mail"></i>: Markus_Rice@gmail.com<br></small>
+                                                <small>Address: 555 New York Road, Melbourne, Vic, 3300</small>-->
+                                            </h4>
+                                            <br />
+                                            <br />
+                                        }
+                                    }
+                                    <button>@Html.ActionLink("Add Guardian", "AddGuardian", "Guardian", new { id = Model.Student.StudentId }, null)</button>
+                                    <button>@Html.ActionLink("New Ticket", "AddTicket", "Ticket", new { id = Model.Student.StudentId }, null)</button>
+                                }
+                                <!--Guardian Info
+                                <h4 class="title">.<br />
+                                    <small><i class="pe-7s-home"></i>: (03) 9214 8000 </small>
+                                    <small><i class="pe-7s-phone"></i>: 0412 399 911</small>
+                                    <small><i class="pe-7s-mail"></i>: Markus_Rice@gmail.com<br></small>
+                                    <small>Address: 555 New York Road, Melbourne, Vic, 3300</small>
+                                </h4>-->
+                            </a>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="text-center">
+                        <button href="#" class="btn btn-simple"><i class="fa fa-facebook-square"></i></button>
+                        <button href="#" class="btn btn-simple"><i class="fa fa-twitter"></i></button>
+                        <button href="#" class="btn btn-simple"><i class="fa fa-google-plus-square"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+﻿@using SkiAssistWebsite.Models
+@using System.Web.UI.WebControls
+@model SkiAssistWebsite.ViewModels.DashboardViewModel
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+
+                    <div class="header">
+                        <h4 class="title">Student Search</h4>
+                    </div>
+                    <div class="content">
+                        <form>
+                            <div class="row">
+
+                                <div class="col-md-10">
+                                    <div class="search">
+                                        <input type="text" class="form-control" placeholder="Search" value="">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-info btn-fill">Search</button>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Current Custodies</h4>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                            <th>Class Level</th>
+                            <th>Instructor</th>
+                            <th>Students In Custody</th>
+                            </thead>
+                            <tbody>
+                                @{
+                                    if (Model.StaffListViewModel.StaffList.Count == 0)
+                                    {
+                                        <h3 class="title">There are no current custodies.</h3>
+                                    }
+                                    else
+                                    {
+                                        foreach (var staff in Model.StaffListViewModel.StaffList)
+                                        {
+                                            <tr>
+                                                <td>@staff.CurrentCustodyTypeList.ElementAt(0)</td>
+                                                <td>@staff.FirstName @staff.LastName</td>
+                                                <td>@staff.CurrentCustodyTypeList.Count</td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Lost Children</h4>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Ticket Number</th>
+                            <th>Instructor</th>
+                            <th>Alert Raised</th>
+                            </thead>
+                            <tbody>
+                                @{
+                                    if (Model.LostStudentViewModel.LostStudents.Count == 0)
+                                    {
+                                        <h3 class="title">There are no lost students.</h3>
+                                    }
+                                    else
+                                    {
+                                        foreach (var lostStudent in Model.LostStudentViewModel.LostStudents)
+                                        {
+                                            <tr>
+                                                <td>@lostStudent.StudentId</td>
+                                                <td>@lostStudent.StudentFirstName @lostStudent.StudentLastName</td>
+                                                <td>@lostStudent.TicketNumber</td>
+                                                <td>@lostStudent.StaffFirstName @lostStudent.StaffLastName</td>
+                                                <td>@lostStudent.TimeAlertRaised</td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

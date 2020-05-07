@@ -1,0 +1,103 @@
+﻿@using System.Activities.Expressions
+@using System.Web.Management
+@using SkiAssistWebsite.Controllers
+@model SkiAssistWebsite.Models.AddDiet
+
+@{
+    ViewBag.Title = "New Student";
+    Layout = "/views/shared/_NewLayout.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <!-- Gaurdian Details-->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="header">
+                        <div id="new">
+                            <h4 class="title">Student Details</h4>
+                        </div>
+                        <div class="content">
+
+                            @using (Html.BeginForm("PostStudent", "Student")) 
+                            {
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.AddStudent.StudentFirstName)
+                                            @Html.TextBoxFor(m => m.AddStudent.StudentFirstName, new { @class = "form-control", placeholder = "First Name" })
+                                            @Html.ValidationMessageFor(m => m.AddStudent.StudentFirstName)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.AddStudent.StudentLastName)
+                                            @Html.TextBoxFor(m => m.AddStudent.StudentLastName, new { @class = "form-control", placeholder = "Last Name" })
+                                            @Html.ValidationMessageFor(m => m.AddStudent.StudentLastName)
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.AddStudent.TicketNumber)
+                                            @Html.TextBoxFor(m => m.AddStudent.TicketNumber, new { @class = "form-control", placeholder = "Ticket Number" })
+                                            @Html.ValidationMessageFor(m => m.AddStudent.TicketNumber)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.AddStudent.StudentDob)
+                                            @Html.EditorFor(m => m.AddStudent.StudentDob, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(m => m.AddStudent.StudentDob)
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--dietary issue section start-->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.AddStudent.DietRequerment)
+                                            <fieldset class="dietListBox">
+                                                @foreach (var item in Model.DietList)
+                                                {
+                                                    <div class="col-md-4">
+                                                        <input type="checkbox" name="Halal" value="Halal" />
+                                                        <label for="Halal">@item.DietRequirement</label>
+                                                    </div>
+                                                    <br />
+                                                }
+                                                <div>
+                                                    @Html.TextBoxFor(m => m.AddStudent.DietRequerment, new { @class = "form-control", placeholder = "Diet Requerment" })
+                                                    @Html.ValidationMessageFor(m => m.AddStudent.DietRequerment)
+                                                </div>
+
+                                            </fieldset>
+                                        </div>
+                                        </div>
+                                    </div>
+                                <!--dietary issue section end-->
+                                <!--medical issue section start-->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.AddStudent.MedicalRequerment)
+                                            @Html.TextAreaFor(m => m.AddStudent.MedicalRequerment, new { @class = "form-control", placeholder = "Medical Requerment" })
+                                            @Html.ValidationMessageFor(m => m.AddStudent.MedicalRequerment)
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--medical issue section end-->
+                                <button type="submit" class="btn btn-info btn-fill pull-middle">Add New Student</button>
+                            }
+                            <div class="clear-fix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

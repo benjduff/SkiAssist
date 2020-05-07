@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="258c6c77c88a46b29089281ab4790c65" Name="Diagram1">
+        <EntityTypeShape EntityType="SkiAssistDBModel.Custody" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SkiAssistDBModel.CustodyType" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SkiAssistDBModel.Diet" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SkiAssistDBModel.Guardian" Width="1.5" PointX="5.375" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="SkiAssistDBModel.Permission" Width="1.5" PointX="1.5" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SkiAssistDBModel.Role" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SkiAssistDBModel.Skill" Width="1.5" PointX="6" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SkiAssistDBModel.Staff" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SkiAssistDBModel.Student" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SkiAssistDBModel.StudentGuardian" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SkiAssistDBModel.StudentSkill" Width="1.5" PointX="8.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SkiAssistDBModel.Ticket" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="SkiAssistDBModel.FK_Custody_CustodyType" ManuallyRouted="false" />
+        <AssociationConnector Association="SkiAssistDBModel.FK_Custody_Staff" ManuallyRouted="false" />
+        <AssociationConnector Association="SkiAssistDBModel.FK_Custody_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="SkiAssistDBModel.FK_StudentGuardian_Guardian" ManuallyRouted="false" />
+        <AssociationConnector Association="SkiAssistDBModel.FK_Staff_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="SkiAssistDBModel.FK_StudentSkill_Skill" ManuallyRouted="false" />
+        <AssociationConnector Association="SkiAssistDBModel.FK_Student_Ticket" ManuallyRouted="false" />
+        <AssociationConnector Association="SkiAssistDBModel.FK_StudentGuardian_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="SkiAssistDBModel.FK_StudentSkill_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="SkiAssistDBModel.PermissionGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="SkiAssistDBModel.StudentDiet" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SkiAssistDBModel.C__RefactorLog" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SkiAssistDBModel.MedicalConditions" Width="1.5" PointX="0.75" PointY="6.625" />
+        <AssociationConnector Association="SkiAssistDBModel.StudentMedical" />
+        <EntityTypeShape EntityType="SkiAssistDBModel.Token" Width="1.5" PointX="7.375" PointY="7.875" />
+        <AssociationConnector Association="SkiAssistDBModel.FK_Staff_Token" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
